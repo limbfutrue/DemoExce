@@ -1,0 +1,6 @@
+自定义评星条
+ <com.idlestar.ratingstar.RatingStarView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        app:rating="3"
+        />

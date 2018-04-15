@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="0.0dip"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:padding="12.0dip" >
+
+        <ImageView
+            android:id="@+id/img_item"
+            android:layout_width="58.0dip"
+            android:layout_height="58.0dip"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/app_name"
+            android:background="@drawable/ic_launcher_background"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

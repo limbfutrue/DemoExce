@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Custom_Title_Bar">
+        <attr name="left_image" format="integer|reference"/>
+        <attr name="left_text" format="reference|string"/>
+        <attr name="left_showImg" format="integer"/>
+        <attr name="left_text_size" format="dimension"/>
+        <attr name="left_text_color" format="color"/>
+
+        <attr name="center_text" format="reference|string"/>
+        <attr name="center_text_size" format="dimension"/>
+        <attr name="center_text_color" format="color"/>
+
+        <attr name="right_image" format="integer|reference"/>
+        <attr name="right_text" format="reference|string"/>
+        <attr name="right_showImg" format="integer"/>
+        <attr name="right_text_size" format="dimension"/>
+        <attr name="right_text_color" format="color"/>
+    </declare-styleable>
+</resources>
