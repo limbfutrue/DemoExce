@@ -121,13 +121,26 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
 
         //这里我们既然都已经拿到了泛型的真实类型，即对应的 class ，那么当然可以开始解析数据了，我们采用 Gson 解析
         //以下代码是根据泛型解析数据，返回对象，返回的对象自动以参数的形式传递到 onSuccess 中，可以直接使用
-        ResponseBody body = response.body();
-        JsonReader jsonReader = new JsonReader(body.charStream());
-        //有数据类型，表示有data
-        Log.e("callback", "ClassType: "+type.toString());
-        T data = Convert.fromJson(jsonReader, type);
-        Log.e("callback", "返回数据: " + JSON.toJSONString(data));
+        //------------------------------one  method-------------------------//
+        String s = response.body().string();
+        Log.e("callback", "--解析前--返回数据--: "+s);
+        T data = Convert.fromJson(s, type);
+        Log.e("callback", "--解析后--返回数据--: " + JSON.toJSONString(data));
         response.close();
+        //------------------------------one  method-------------------------//
+
+
+
+        //------------------------------two  method-------------------------//
+//        ResponseBody body = response.body();
+//        JsonReader jsonReader = new JsonReader(body.charStream());
+//        //有数据类型，表示有data
+//        Log.e("callback", "ClassType: "+type.toString());
+//        T data = Convert.fromJson(jsonReader, type);
+//        Log.e("callback", "返回数据: " + JSON.toJSONString(data));
+//        response.close();
+        //------------------------------two  method-------------------------//
+
         //判断
         String code = ((BaseResponse) data).result;
         String rspCode = ((BaseResponse) data).rspCode;
