@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.libaoming.demoexce.demoexce.MainActivity">
+    tools:context="com.libaoming.demoexce.demoexce.MainAct">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
  * project_name : DemoExce
  */
 
-public abstract class MVPBaseFragment<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends Fragment implements MVPBaseView{
+public abstract class MVPBaseFrg<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends Fragment implements MVPBaseView{
     public View footView;
     public P presenter;
     private TitleBar titleBar;

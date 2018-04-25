@@ -22,7 +22,7 @@ import com.visitor.lc.baselibrary.R;
  * project_name : DemoExce
  */
 
-public abstract class MVPBaseActivity<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends AppCompatActivity implements MVPBaseView{
+public abstract class MVPBaseAct<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends AppCompatActivity implements MVPBaseView{
     public P presenter;
     private ImageView mIvLeft, mIvRight;
     private TextView mTvLeft, mTvRight, mTvTitle;
@@ -101,5 +101,6 @@ public abstract class MVPBaseActivity<V extends MVPBaseView , P extends MVPBaseP
         if (presenter!=null) {
             presenter.detachView();
         }
+        ActManager.getManager().removeActivity(this);
     }
 }

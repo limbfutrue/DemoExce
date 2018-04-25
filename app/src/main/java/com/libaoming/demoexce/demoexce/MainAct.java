@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.baselibrary.base.basemvp.MVPBaseActivity;
+import com.baselibrary.base.basemvp.MVPBaseAct;
 import com.baselibrary.base.basemvp.TitleBar;
 import com.libaoming.demoexce.demoexce.view.draggridview.DragGridView;
 import com.libaoming.demoexce.demoexce.view.draggridview.GridViewAdapter;
@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends MVPBaseActivity<MyView, MyPresenter> implements View.OnClickListener, MyView {
+public class MainAct extends MVPBaseAct<MyView, MyPresenter> implements View.OnClickListener, MyView {
 
 
     private int i = 0;
@@ -42,14 +42,14 @@ public class MainActivity extends MVPBaseActivity<MyView, MyPresenter> implement
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                presenter.obtainNetData(MainActivity.this);
+                presenter.obtainNetData(MainAct.this);
 
             }
         });
 
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
-        ft.replace(R.id.fl,new BlankFragment());
+        ft.replace(R.id.fl,new BlankFrg());
         ft.commit();
     }
 
