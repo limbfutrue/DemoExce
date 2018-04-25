@@ -1,0 +1,11 @@
+可拖拽的GridView
+
+gv = findViewById(R.id.systemGridView);
+List<String> lists = new ArrayList<>();
+lists.add("11111");
+lists.add("2222");
+lists.add("33333");
+lists.add("4444");
+GridViewAdapter adapter = new GridViewAdapter(this,lists);
+
+适配器可以 根据情况做适当修改List<Object> lists = new ArrayList<>();
