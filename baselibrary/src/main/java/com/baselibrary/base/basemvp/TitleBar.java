@@ -1,11 +1,8 @@
-package com.baselibrary.base;
+package com.baselibrary.base.basemvp;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,46 +10,35 @@ import android.widget.TextView;
 import com.visitor.lc.baselibrary.R;
 
 /**
- * 带标题栏的公共Activity
+ * Created by Libaoming on 25/4/2018.
+ * 11 hour 28 minute
+ * project_name : DemoExce
  */
-public abstract class MyBaseAct extends AppCompatActivity {
 
-    private ImageView mIvLeft, mIvRight;
-    private TextView mTvLeft, mTvRight, mTvTitle;
+public class TitleBar {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        View contentView = getLayoutInflater().inflate(getLayoutResId(), null);
-        contentView.setLayoutParams(params);
-        //处理是否显示标题栏
-        if (isShowTitleBar()) {
-            LinearLayout titleBarView = (LinearLayout) getLayoutInflater().inflate(R.layout.act_my_base, null);
-            titleBarView.addView(contentView);
-            setContentView(titleBarView);
-            initTitleBarView();
-            initTitleBar();
-        } else {
-            setContentView(contentView);
-        }
-        ActManager.getManager().addActivity(this);
-        initView();
-        initListener();
-        initData();
+    private ImageView mIvRight,mIvLeft;
+    private TextView mTvLeft,mTvTitle,mTvRight;
+
+    public View initTitleBar(Activity act, View contentView){
+        LinearLayout titleBarView = (LinearLayout) act.getLayoutInflater().inflate(R.layout.act_my_base, null);
+        titleBarView.addView(contentView);
+        initTitleBarView(titleBarView);
+        return titleBarView;
     }
 
     /**
      * 初始化标题栏对象
+     * @param view
      */
-    private void initTitleBarView() {
-        mIvLeft = (ImageView) findViewById(R.id.iv_left_icon);
-        mTvLeft = (TextView) findViewById(R.id.tv_left_text);
-        mIvRight = (ImageView) findViewById(R.id.iv_right_icon);
-        mTvRight = (TextView) findViewById(R.id.tv_right_text);
-        mTvTitle = (TextView) findViewById(R.id.tv_title);
+    private void initTitleBarView(View view) {
+        mIvLeft = (ImageView) view.findViewById(R.id.iv_left_icon);
+        mTvLeft = (TextView) view.findViewById(R.id.tv_left_text);
+        mIvRight = (ImageView)view.findViewById(R.id.iv_right_icon);
+        mTvRight = (TextView)view.findViewById(R.id.tv_right_text);
+        mTvTitle = (TextView)view.findViewById(R.id.tv_title);
     }
+
 
     /**
      * 设置titleBar监听按键
@@ -85,42 +71,6 @@ public abstract class MyBaseAct extends AppCompatActivity {
             }
         });
     }
-    /**
-     * 是否显示标题栏
-     *
-     * @return
-     */
-    public abstract boolean isShowTitleBar();
-
-    /**
-     * 获取子布局
-     *
-     * @return
-     */
-    public abstract int getLayoutResId();
-
-    /**
-     * 初始化标题栏数据
-     */
-    public abstract void initTitleBar();
-
-    /**
-     * 初始化布局
-     */
-    public void initView() {
-    }
-
-    /**
-     * 初始化监听
-     */
-    public void initListener() {
-    }
-
-    /**
-     * 初始化网络数据
-     */
-    public void initData() {
-    }
 
     /**
      * 设置 标题栏 内容
@@ -130,36 +80,35 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * @param rightRes 右侧图标
      * @param rightText 右侧文字
      */
-    public void setTitleBarContent(int leftRes, String leftText, String title, int rightRes, String rightText) {
-        setTTitle(title)
+    public TitleBar setTitleBarContent(int leftRes, String leftText, String title, int rightRes, String rightText) {
+        setTitle(title)
                 .setLeftIcon(leftRes)
                 .setLeftText(leftText)
                 .setRightIcon(rightRes)
                 .setRightText(rightText);
+        return this;
     }
-
     /**
      * 设置 标题栏 内容
      * @param leftRes 左侧图标
      * @param leftText 左侧文字
      * @param title 标题文字
      */
-    public void setTitleBarContent(int leftRes, String leftText, String title) {
-        setTTitle(title)
+    public TitleBar setTitleBarContent(int leftRes, String leftText, String title) {
+        setTitle(title)
                 .setLeftIcon(leftRes)
                 .setLeftText(leftText)
                 .setRightIcon(0)
                 .setRightText("");
+        return this;
     }
-
-
     /**
      * 设置标题栏标题
      *
      * @param title
      * @return
      */
-    private MyBaseAct setTTitle(String title) {
+    private TitleBar setTitle(String title) {
         if (mTvTitle == null) {
             return this;
         }
@@ -173,7 +122,7 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * @param leftRes
      * @return
      */
-    private MyBaseAct setLeftIcon(int leftRes) {
+    private TitleBar setLeftIcon(int leftRes) {
         if (mIvLeft == null) {
             return this;
         }
@@ -192,7 +141,7 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * @param leftText
      * @return
      */
-    private MyBaseAct setLeftText(String leftText) {
+    private TitleBar setLeftText(String leftText) {
         if (mTvLeft == null) {
             return this;
         }
@@ -207,7 +156,7 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * @param rightRes
      * @return
      */
-    private MyBaseAct setRightIcon(int rightRes) {
+    private TitleBar setRightIcon(int rightRes) {
         if (mIvRight == null) {
             return this;
         }
@@ -226,7 +175,7 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * @param rightText
      * @return
      */
-    private MyBaseAct setRightText(String rightText) {
+    private TitleBar setRightText(String rightText) {
         if (mTvRight == null) {
             return this;
         }
@@ -248,7 +197,6 @@ public abstract class MyBaseAct extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         }
     }
-
     public interface ITitleBarListener{
         void onclickLeft();
         void onclickRight();

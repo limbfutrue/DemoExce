@@ -2,10 +2,11 @@ package com.libaoming.demoexce.demoexce.test.test_mvpmodel_demo.presenter;
 
 import android.app.Activity;
 
+import com.baselibrary.network.BaseResponse;
+import com.baselibrary.network.JsonCallback;
 import com.libaoming.demoexce.demoexce.test.test_mvpmodel_demo.model.IMvpImpl;
 import com.libaoming.demoexce.demoexce.test.test_mvpmodel_demo.model.IMvpModel;
 import com.libaoming.demoexce.demoexce.test.test_mvpmodel_demo.view.IMvpTestView;
-import com.libaoming.demoexce.demoexce.utils.net.JsonCallBack;
 import com.lzy.okgo.OkGo;
 
 import okhttp3.Call;
@@ -43,9 +44,9 @@ public class MvpPresenter {
         //处理 通知view层
         iMvpTestView.dealwithView1();
         OkGo.post("")
-                .execute(new JsonCallBack<Object>(context,true) {
+                .execute(new JsonCallback<BaseResponse>(context,true) {
                     @Override
-                    public void onSuccess(Object o, Call call, Response response) {
+                    public void onSuccess(BaseResponse o, Call call, Response response) {
                         //model处理数据
                         iMvpModel.setInfo("");
                     }

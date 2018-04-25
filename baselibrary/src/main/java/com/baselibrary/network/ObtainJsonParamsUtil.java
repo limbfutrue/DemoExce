@@ -15,8 +15,6 @@ public class ObtainJsonParamsUtil {
 
     public ObtainJsonParamsUtil(){
         params = new HashMap<>();
-//        params.put("user_id", AppConfig.getInstance().getUserId());
-//        params.put("data_src", 2);//1 PC端 2 Android端
     }
     /**
      * 初始化参数

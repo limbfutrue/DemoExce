@@ -2,6 +2,8 @@ package com.baselibrary.base;
 
 import android.app.Application;
 
+import com.lzy.okgo.OkGo;
+
 /**
  * Created by Libaoming on 22/1/2018.
  * 10 hour 39 minute
@@ -23,6 +25,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         initManager();
+        OkGo.getInstance().setConnectTimeout(1000*5);
     }
 
     private void initManager() {

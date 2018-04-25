@@ -1,17 +1,13 @@
 package com.libaoming.demoexce.demoexce;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
-import com.libaoming.demoexce.demoexce.receiver.MyReceiver;
+import com.baselibrary.base.basemvp.MVPBaseActivity;
+import com.baselibrary.base.basemvp.TitleBar;
 import com.libaoming.demoexce.demoexce.view.draggridview.DragGridView;
 import com.libaoming.demoexce.demoexce.view.draggridview.GridViewAdapter;
 import com.libaoming.demoexce.demoexce.view.dragview.GridViewItem;
@@ -20,20 +16,20 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends MVPBaseActivity<MyView, MyPresenter> implements View.OnClickListener, MyView {
 
 
-    private int i=0;
+    private int i = 0;
     private String videoPath;
     private DragGridView gv;
     private List<GridViewItem> list = new ArrayList<>();
+    private FragmentTransaction ft;
+    private FragmentManager fm;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void initView() {
         EventBus.getDefault().register(this);
         gv = findViewById(R.id.systemGridView);
         List<String> lists = new ArrayList<>();
@@ -41,8 +37,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lists.add("2222");
         lists.add("33333");
         lists.add("4444");
-        GridViewAdapter adapter = new GridViewAdapter(this,lists);
+        GridViewAdapter adapter = new GridViewAdapter(this, lists);
         gv.setAdapter(adapter);
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.obtainNetData(MainActivity.this);
+
+            }
+        });
+
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.fl,new BlankFragment());
+        ft.commit();
+    }
+
+    @Override
+    public TitleBar obtainTitleBarLayout() {
+        return null;
+    }
+
+    @Override
+    public void initTitleBarData(TitleBar titleBar) {
+        titleBar.setTitleBarContent(0,"返回","首页");
+    }
+
+    @Override
+    public int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public MyPresenter createPresenter() {
+        return new MyPresenter();
     }
 
 
@@ -54,12 +82,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Subscribe
-    public void MainThread(Object o){
+    public void MainThread(Object o) {
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void success() {
+        Log.e("error_code", "success: ");
     }
 }

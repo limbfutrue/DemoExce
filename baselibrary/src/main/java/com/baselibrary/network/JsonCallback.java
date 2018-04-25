@@ -1,6 +1,7 @@
 package com.baselibrary.network;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.request.BaseRequest;
 import com.baselibrary.utils.LogUtil;
 import com.baselibrary.utils.StringUtil;
+import com.visitor.lc.baselibrary.R;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -30,19 +32,19 @@ import okhttp3.ResponseBody;
 public abstract class JsonCallback<T> extends AbsCallback<T> {
     private Activity context;
     private boolean isShowDialog;
-//    private CustomerDialog dialog;
+    private CustomerDialog dialog;
 
 
     private void initDialog(Activity activity) {
-//        dialog = new CustomerDialog(activity, R.style.MyDialog);
-//        dialog.setCanceledOnTouchOutside(false);
-//        dialog.setMessage("加载中...");
-//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//
-//            }
-//        });
+        dialog = new CustomerDialog(activity, R.style.MyDialog);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setMessage("加载中...");
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
     }
 
     public JsonCallback(Activity activity, boolean isShowDialog) {
@@ -64,9 +66,9 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                         return;
                     }
                 }
-//                if (dialog != null && !dialog.isShowing()) {
-//                    dialog.show();
-//                }
+                if (dialog != null && !dialog.isShowing()) {
+                    dialog.show();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,10 +79,10 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     public void onAfter(@Nullable T t, @Nullable Exception e) {
         super.onAfter(t, e);
         //网络请求结束后关闭对话框
-//        if (isShowDialog)
-//            if (dialog != null && dialog.isShowing()) {
-//                dialog.dismiss();
-//            }
+        if (isShowDialog)
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
     }
 
     @Override
