@@ -19,7 +19,7 @@ package com.baselibrary.utils.wheelView.adapter;
 
 import android.content.Context;
 
-import com.yyxt.medical.medicalequipment.view.wheelView.WheelAdapter;
+import com.baselibrary.utils.wheelView.WheelAdapter;
 
 /**
  * Adapter class for old wheel adapter (deprecated WheelAdapter class).
