@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/transparent" />
+            android:indeterminateDrawable="@drawable/progressbar"/>
 
         <TextView
             android:id="@+id/tv_msg"
@@ -29,4 +29,6 @@
             android:paddingTop="20px"
             android:textColor="#fff" />
     </LinearLayout>
+
+
 </LinearLayout>

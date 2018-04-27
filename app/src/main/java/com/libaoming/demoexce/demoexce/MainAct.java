@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 
 import com.baselibrary.base.basemvp.MVPBaseAct;
 import com.baselibrary.base.basemvp.TitleBar;
+import com.libaoming.demoexce.demoexce.test.BlankFrg;
+import com.libaoming.demoexce.demoexce.test.MyPresenter;
+import com.libaoming.demoexce.demoexce.test.MyView;
 import com.libaoming.demoexce.demoexce.view.draggridview.DragGridView;
 import com.libaoming.demoexce.demoexce.view.draggridview.GridViewAdapter;
 import com.libaoming.demoexce.demoexce.view.dragview.GridViewItem;
@@ -55,7 +58,7 @@ public class MainAct extends MVPBaseAct<MyView, MyPresenter> implements View.OnC
 
     @Override
     public TitleBar obtainTitleBarLayout() {
-        return null;
+        return new TitleBar();
     }
 
     @Override
