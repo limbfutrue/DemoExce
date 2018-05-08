@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.libaoming.demoexce.demoexce.R;
-import com.libaoming.demoexce.demoexce.test.test_mvpmodel_demo.view.MvpTestActivity;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,7 +30,6 @@ public class EventBusTestReceiverActivity extends AppCompatActivity {
      */
     @Subscribe
     public void onEventMainThread(EventBusReceiverBean receiverBean){
-        startActivity(new Intent(this, MvpTestActivity.class));
         Log.e("error_code", "onEventMainThread: eventData1:"+Thread.currentThread().getName()+receiverBean.eventData1+"\neventData2:"+receiverBean.eventData2);
     }
 

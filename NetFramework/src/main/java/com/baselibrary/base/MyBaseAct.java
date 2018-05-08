@@ -52,7 +52,7 @@ public abstract class MyBaseAct extends AppCompatActivity {
      * 初始化标题栏数据
      * @param titleBar
      */
-    public void initTitleBarData(TitleBar titleBar){}
+    public abstract void initTitleBarData(TitleBar titleBar);
 
     /**
      * 获取子布局

@@ -34,7 +34,6 @@ public class MyPresenter extends MVPBasePresenter<MyView> {
                     @Override
                     public void onAfter(@Nullable BaseResponse baseResponse, @Nullable Exception e) {
                         super.onAfter(baseResponse, e);
-                        getView().success();
                     }
                 });
     }
