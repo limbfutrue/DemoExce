@@ -131,7 +131,11 @@ public class TitleBar {
         } else {
             mIvLeft.setVisibility(View.VISIBLE);
         }
-        mIvLeft.setImageResource(leftRes);
+        try {
+            mIvLeft.setImageResource(leftRes);
+        }catch (Exception e){
+            mIvLeft.setImageResource(R.mipmap.ic_back);
+        }
         return this;
     }
 

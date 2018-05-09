@@ -143,10 +143,10 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
 
         //判断
         String code = ((BaseResponse) data).result;
-        String rspCode = ((BaseResponse) data).rspCode;
+        String rspCode = ((BaseResponse) data).rspCode==null?"-1":((BaseResponse) data).rspCode;
 
         final String msg = ((BaseResponse) data).msg;
-        if (code.equals(2)) {
+        if (code.equals(1)) {
             return data;
         } else {
             if (rspCode.equals("9000")) {
