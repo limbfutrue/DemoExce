@@ -34,22 +34,6 @@ public class MainAct extends MVPBaseAct<MyView, MyPresenter> implements View.OnC
     @Override
     public void initView() {
         EventBus.getDefault().register(this);
-        gv = findViewById(R.id.systemGridView);
-        List<String> lists = new ArrayList<>();
-        lists.add("11111");
-        lists.add("2222");
-        lists.add("33333");
-        lists.add("4444");
-        GridViewAdapter adapter = new GridViewAdapter(this, lists);
-        gv.setAdapter(adapter);
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                presenter.obtainNetData(MainAct.this);
-
-            }
-        });
-
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(R.id.fl,new BlankFrg());

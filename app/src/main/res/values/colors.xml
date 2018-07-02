@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#3F51B5</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="appTheme">#3F51B5</color>
+
 </resources>

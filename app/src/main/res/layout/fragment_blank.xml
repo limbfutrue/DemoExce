@@ -1,40 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.libaoming.demoexce.demoexce.test.BlankFrg">
-
-<ImageView
-    android:id="@+id/iv_imag"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    android:scaleType="fitXY" />
-
-<EditText
-    android:id="@+id/et_username"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:hint="用户名"
-    />
-<EditText
-    android:id="@+id/et_psd"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:hint="密码"
-    />
-<Button
-    android:id="@+id/bt_login"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:text="登录"
-    />
-
-<com.libaoming.demoexce.demoexce.view.LineChartView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1f999999"
-    />
-</LinearLayout>
+    android:background="@color/black"
+    tools:context="com.libaoming.demoexce.demoexce.test.BlankFrg">
+
+    <com.libaoming.demoexce.demoexce.view.PullUpDragLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_up_drag_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:PullUpDrag_BottomBorderHeigth="30dp"
+        app:PullUpDrag_ContentView="@layout/activity_main"
+        app:PullUpDrag_BottomView="@layout/menu"
+        />
+</RelativeLayout>

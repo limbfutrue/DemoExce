@@ -16,7 +16,7 @@ import com.visitor.lc.baselibrary.R;
 /**
  * 带标题栏的公共Activity
  */
-public abstract class MyBaseAct extends AppCompatActivity {
+public abstract class MyBaseAct extends AppCompatActivity implements View.OnClickListener {
 
     private TitleBar titleBar;
 
@@ -85,5 +85,10 @@ public abstract class MyBaseAct extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ActManager.getManager().removeActivity(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
