@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.testprogram.LoginAct">
+        <activity android:name=".ui.ui.TestAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,6 @@
         </activity>
         <activity android:name=".test.test_eventbus_demo.EventBusTestSendActivity" />
         <activity android:name=".test.test_eventbus_demo.EventBusTestReceiverActivity" />
-        <activity android:name=".test.test_mvpmodel_demo.view.MvpTestActivity" />
         <activity
             android:name=".test.test_1px_keeplive.OnePiexlActivity"
             android:screenOrientation="portrait"
@@ -46,9 +45,17 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.TestAct" />
+        <activity android:name=".ui.testprogram.LoginAct" />
         <activity android:name=".MainAct" />
+        <activity android:name=".ui.TestAct" />
         <activity android:name=".ui.testprogram.RegistAct"></activity>
+
+        <activity android:name=".ui.ui.rxjavaTest.SimpleActivity" />
+        <activity android:name=".ui.ui.rxjavaTest.MoreActivity" />
+        <activity android:name=".ui.ui.rxjavaTest.LambdaActivity" />
+        <activity android:name=".ui.ui.rxjavaTest.NetworkActivity" />
+        <activity android:name=".ui.ui.rxjavaTest.SafeActivity" />
+        <activity android:name=".ui.ui.rxjavaTest.BindingActivity"></activity>
     </application>
 
 </manifest>

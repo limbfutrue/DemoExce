@@ -41,6 +41,21 @@ public class OkgoUtils {
      * 数据请求
      * @param context
      * @param url
+     * @param biz
+     * @return
+     */
+    public static PostRequest postNet(Context context, String url, String biz){
+        Log.e("callback", "请求参数 : "+biz);
+        Log.e("callback", "请求URL == : "+url);
+        return OkGo.post(url)
+                .tag(context)
+                .params("companyId", AppConfig.getInstance().obtainCompanyId())
+                .params("jsonData",biz);
+    }
+    /**
+     * 数据请求
+     * @param context
+     * @param url
      * @return
      */
     public static PostRequest postNet(Context context, String url){

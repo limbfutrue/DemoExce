@@ -14,6 +14,7 @@ public class UserBean extends BaseResponse {
     private int age;
     private String sex;
     private String password;
+    public String msg;
 
     public Integer getId() {
         return id;
