@@ -6,23 +6,36 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.wifi.WifiManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.ViewDragHelper;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.baselibrary.base.MyApplication;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 import static android.content.Context.TELEPHONY_SERVICE;
@@ -31,6 +44,14 @@ import static android.content.Context.TELEPHONY_SERVICE;
  * 工具类
  */
 public class CommonUtils {
+    //随机数数组
+    private static final char[] CHARS = {
+            '2', '3', '4', '5', '6', '7', '8', '9',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm',
+            'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+            'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    };
 
     public static <T> boolean isListNull(Collection<T> collection) {
         if (collection == null || collection.isEmpty()) {
@@ -409,7 +430,7 @@ public class CommonUtils {
      * @param context
      * @return
      */
-    private String getWlanId(Context context) {
+    public String getWlanId(Context context) {
         WifiManager wm = (WifiManager) context.getSystemService(MyApplication.WIFI_SERVICE);
         String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
         return m_szWLANMAC;
@@ -421,7 +442,7 @@ public class CommonUtils {
      * @param context
      * @return
      */
-    private String getImei(Context context) {
+    public String getImei(Context context) {
         TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             return "";
@@ -430,11 +451,134 @@ public class CommonUtils {
         return szImei;
     }
 
-    private static String format(int x) {
+    public static String format(int x) {
         String s = "" + x;
         if (s.length() == 1)
             s = "0" + s;
         return s;
     }
 
+    /**
+     * 设置监听 并设置文本渐变颜色
+     * 水平渐变
+     * @param editText
+     */
+    public static void setEditTextLinearGradient(final EditText editText, final int startColor, final int endColor){
+        LinearGradient mLinearGradient = new LinearGradient(0, 0, editText.getHint().length()*editText.getTextSize(), 0, startColor,endColor, Shader.TileMode.CLAMP);
+        editText.getPaint().setShader(mLinearGradient);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LinearGradient mLinearGradient = new LinearGradient(0, 0, s.length()*editText.getTextSize(), 0, startColor, endColor, Shader.TileMode.CLAMP);
+                editText.getPaint().setShader(mLinearGradient);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    /**
+     * 设置监听 并设置文本渐变颜色
+     * 水平渐变
+     * @param textView
+     */
+    public static void setTextViewLinearGradient(TextView textView, final int startColor, final int endColor){
+        LinearGradient mLinearGradient = new LinearGradient(0, 0, textView.getText().length()*textView.getTextSize(), 0, startColor,endColor, Shader.TileMode.CLAMP);
+        textView.getPaint().setShader(mLinearGradient);
+    }
+
+    /**
+     * DrawerLayout设置滑动边距
+     * @param activity
+     * @param drawerLayout
+     * @param displayWidthPercentage
+     */
+    public static void setDrawerLeftEdgeSize(Activity activity, DrawerLayout drawerLayout, float displayWidthPercentage) {
+        if (activity == null || drawerLayout == null) return;
+        try {
+            Field leftDraggerField = drawerLayout.getClass().getDeclaredField("mLeftDragger");
+            leftDraggerField.setAccessible(true);
+            ViewDragHelper leftDragger = (ViewDragHelper) leftDraggerField.get(drawerLayout);
+            Field edgeSizeField = leftDragger.getClass().getDeclaredField("mEdgeSize");
+            edgeSizeField.setAccessible(true);
+            int edgeSize = edgeSizeField.getInt(leftDragger);
+            DisplayMetrics dm = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+            edgeSizeField.setInt(leftDragger, Math.max(edgeSize, (int) (dm.widthPixels * displayWidthPercentage)));
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * 获取随机字符
+     * @return
+     */
+    public static String getRandomStr(){
+        String code = "";
+        for (int i = 0; i < 4; i++) {
+            //随机获取CHARS的下标
+            int rand = (int) ((Math.random()*10 + 1)*5);
+            //如果随机下标大于CHARS数组长度，就默认+A，否则顺序拼接
+            if (rand<CHARS.length) {
+                //拼接获取的随机数据
+                code = code + CHARS[rand];
+            }else {
+                code = code+"A";
+            }
+        }
+
+        return code;
+    }
+
+    /**
+     * 关闭软键盘
+     * @param editText
+     */
+    public static void closeSoftKeyBroad(final EditText editText){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask()   {
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }, 300);
+    }
+
+    /**
+     * 设置字数限制监听
+     * @param context    上下文对象
+     * @param et         编辑框的控件对象
+     * @param fontLimit  限制字数
+     * @param showText   字数显示的文本控件
+     */
+    public static void setTextChangeListener(Context context, final EditText et, final int fontLimit, final TextView showText){
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(et.getText().toString()) && et.getText().toString().length() > fontLimit) {
+                    ToastUtils.showShortToast("最多输入"+fontLimit+"个字符");
+                } else {
+                    showText.setText(et.getText().toString().length()+"");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 }

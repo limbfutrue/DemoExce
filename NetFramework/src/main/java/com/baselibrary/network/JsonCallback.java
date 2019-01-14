@@ -49,8 +49,9 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
 
     public JsonCallback(Activity activity, boolean isShowDialog) {
         super();
-        if (isShowDialog)
+        if (isShowDialog) {
             initDialog(activity);
+        }
         this.context = activity;
         this.isShowDialog = isShowDialog;
     }
@@ -79,10 +80,11 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     public void onAfter(@Nullable T t, @Nullable Exception e) {
         super.onAfter(t, e);
         //网络请求结束后关闭对话框
-        if (isShowDialog)
+        if (isShowDialog) {
             if (dialog != null && dialog.isShowing()) {
                 dialog.dismiss();
             }
+        }
     }
 
     @Override
@@ -129,36 +131,19 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         response.close();
         //------------------------------one  method-------------------------//
 
-
-
-        //------------------------------two  method-------------------------//
-//        ResponseBody body = response.body();
-//        JsonReader jsonReader = new JsonReader(body.charStream());
-//        //有数据类型，表示有data
-//        Log.e("callback", "ClassType: "+type.toString());
-//        T data = Convert.fromJson(jsonReader, type);
-//        Log.e("callback", "返回数据: " + JSON.toJSONString(data));
-//        response.close();
-        //------------------------------two  method-------------------------//
-
         //判断
         String code = ((BaseResponse) data).result;
         String rspCode = ((BaseResponse) data).rspCode==null?"-1":((BaseResponse) data).rspCode;
 
-        final String msg = ((BaseResponse) data).msg;
-        if (code.equals("1")) {
+        final String msg = ((BaseResponse) data).message;
+        //0代表成功 1代表空数据
+        if (BaseData.SUCCESS_DATA_CODE.equals(code) || BaseData.EMPTY_DATA_CODE.equals(code)) {
             return data;
         } else {
-            if (rspCode.equals("9000")) {
-                context.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(context, "token过期，请重新登录", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            if (BaseData.TIME_OUT_CODE.equals(rspCode)) {
 
             } else {
-                if (context != null)
+                if (context != null) {
                     if (StringUtil.isNotNull(msg)) {
                         context.runOnUiThread(new Runnable() {
                             @Override
@@ -174,8 +159,9 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                             }
                         });
                     }
+                }
             }
-            throw new SuccessErrorCodeException(code, ((BaseResponse) data).msg);
+            throw new SuccessErrorCodeException(code, ((BaseResponse) data).message);
         }
     }
 }

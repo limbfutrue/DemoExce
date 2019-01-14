@@ -1,5 +1,6 @@
 package com.baselibrary.base;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ public abstract class MyBaseAct extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View contentView = getLayoutInflater().inflate(getLayoutResId(), null);
         contentView.setLayoutParams(params);
@@ -41,6 +43,12 @@ public abstract class MyBaseAct extends AppCompatActivity implements View.OnClic
         initListener();
         initData();
     }
+    /**
+     * 获取子布局
+     *
+     * @return
+     */
+    public abstract int getLayoutResId();
 
 
     /**
@@ -54,12 +62,6 @@ public abstract class MyBaseAct extends AppCompatActivity implements View.OnClic
      */
     public abstract void initTitleBarData(TitleBar titleBar);
 
-    /**
-     * 获取子布局
-     *
-     * @return
-     */
-    public abstract int getLayoutResId();
 
     /**
      * 初始化布局

@@ -1,5 +1,6 @@
 package com.baselibrary.base.basemvp;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,16 +23,16 @@ import com.visitor.lc.baselibrary.R;
  * project_name : DemoExce
  */
 
-public abstract class MVPBaseAct<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends AppCompatActivity implements MVPBaseView{
+public abstract class MVPBaseAct<V extends MVPBaseView , P extends MVPBasePresenter<V>> extends AppCompatActivity implements MVPBaseView,View.OnClickListener{
     public P presenter;
-    private ImageView mIvLeft, mIvRight;
-    private TextView mTvLeft, mTvRight, mTvTitle;
     public TitleBar titleBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //设置状态栏字体颜色为深色
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View contentView = getLayoutInflater().inflate(getLayoutResId(), null);
         contentView.setLayoutParams(params);
@@ -48,9 +49,14 @@ public abstract class MVPBaseAct<V extends MVPBaseView , P extends MVPBasePresen
         if (presenter!=null){
             presenter.attachView((V) this);
         }
+        initView(savedInstanceState);
         initView();
         initListener();
         obtainNetData();
+    }
+
+    public void initView(Bundle savedInstanceState) {
+
     }
 
     /**
@@ -102,5 +108,10 @@ public abstract class MVPBaseAct<V extends MVPBaseView , P extends MVPBasePresen
             presenter.detachView();
         }
         ActManager.getManager().removeActivity(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

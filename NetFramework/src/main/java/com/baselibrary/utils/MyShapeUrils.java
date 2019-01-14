@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 
+import com.visitor.lc.baselibrary.R;
+
 /**
  * 设置背景shape
  * Created by limb on 2017/8/3.
@@ -63,6 +65,18 @@ public class MyShapeUrils {
         int[][] states = new int[2][];
         states[0] = new int[] { android.R.attr.state_checked};
         states[1] = new int[] { };
+        ColorStateList colorList = new ColorStateList(states, colors);
+        return colorList;
+    }
+
+    /**
+     * 设置不同状态时其文字颜色。（RadioButton）
+     * @return
+     */
+    public static ColorStateList createColorStateList(int[] colors) {
+        int[][] states = new int[2][];
+        states[0] = new int[] { android.R.attr.state_checked};
+        states[1] = new int[] {};
         ColorStateList colorList = new ColorStateList(states, colors);
         return colorList;
     }

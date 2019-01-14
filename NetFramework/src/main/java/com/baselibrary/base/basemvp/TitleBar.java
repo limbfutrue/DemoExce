@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.visitor.lc.baselibrary.R;
@@ -19,6 +20,7 @@ public class TitleBar {
 
     private ImageView mIvRight,mIvLeft;
     private TextView mTvLeft,mTvTitle,mTvRight;
+    private RelativeLayout mRlBar;
 
     public View initTitleBar(Activity act, View contentView){
         LinearLayout titleBarView = (LinearLayout) act.getLayoutInflater().inflate(R.layout.act_my_base, null);
@@ -37,6 +39,7 @@ public class TitleBar {
         mIvRight = (ImageView)view.findViewById(R.id.iv_right_icon);
         mTvRight = (TextView)view.findViewById(R.id.tv_right_text);
         mTvTitle = (TextView)view.findViewById(R.id.tv_title);
+        mRlBar = (RelativeLayout)view.findViewById(R.id.rl_title_bar);
     }
 
 
@@ -108,7 +111,7 @@ public class TitleBar {
      * @param title
      * @return
      */
-    private TitleBar setTitle(String title) {
+    public TitleBar setTitle(String title) {
         if (mTvTitle == null) {
             return this;
         }
@@ -204,5 +207,9 @@ public class TitleBar {
     public interface ITitleBarListener{
         void onclickLeft();
         void onclickRight();
+    }
+
+    public void setTitleBarBackgroundColor(int color){
+        mRlBar.setBackgroundColor(color);
     }
 }

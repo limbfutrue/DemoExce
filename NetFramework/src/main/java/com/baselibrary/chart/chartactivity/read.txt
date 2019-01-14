@@ -1,0 +1,317 @@
+
+                            折线图，柱状图 ，饼图 ， 组合图示例
+
+
+
+-----------------------------------------------------------------
+//柱状图（单）
+-----------------------------------------------------------------
+public class BarChartActivity extends AppCompatActivity {
+
+    private BarChart barChart1;
+
+    private List<String> xAxisValues;
+    private List<Float> yAxisValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bar_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setBarChart(barChart1,xAxisValues,yAxisValues,"柱状图（单）",15,null);
+    }
+
+    private void initView(){
+        barChart1=(BarChart)findViewById(R.id.barChart1);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        yAxisValues = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(String.valueOf(i));
+            yAxisValues.add((float)(Math.random()*1000+20));
+        }
+    }
+}
+
+
+-----------------------------------------------------------------
+//柱状图（双）
+-----------------------------------------------------------------
+
+public class TwoBarChartActivity extends AppCompatActivity {
+
+    private BarChart barChart1;
+
+    private List<Integer> xAxisValues;
+    private List<Float> yAxisValues1;
+    private List<Float> yAxisValues2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bar_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setTwoBarChart(barChart1,xAxisValues,yAxisValues1,yAxisValues2,"柱状图1","柱状图2");
+    }
+
+    private void initView(){
+        barChart1=(BarChart)findViewById(R.id.barChart1);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        yAxisValues1 = new ArrayList<>();
+        yAxisValues2 = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(i);
+            yAxisValues1.add((float)(Math.random()*800+20));
+            yAxisValues2.add((float)(Math.random()*1000+20));
+        }
+    }
+}
+
+
+-----------------------------------------------------------------
+//柱状图（三）
+-----------------------------------------------------------------
+public class ThreeBarChartActivity extends AppCompatActivity {
+
+    private BarChart barChart1;
+
+    private List<Integer> xAxisValues;
+    private List<Float> yAxisValues1;
+    private List<Float> yAxisValues2;
+    private List<Float> yAxisValues3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bar_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setThreeBarChart(barChart1,xAxisValues,yAxisValues1,yAxisValues2,yAxisValues3,"柱状图1","柱状图2","柱状图3");
+    }
+
+    private void initView(){
+        barChart1=(BarChart)findViewById(R.id.barChart1);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        yAxisValues1 = new ArrayList<>();
+        yAxisValues2 = new ArrayList<>();
+        yAxisValues3 = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(i);
+            yAxisValues1.add((float)(Math.random()*800+20));
+            yAxisValues2.add((float)(Math.random()*1000+20));
+            yAxisValues3.add((float)(Math.random()*900+20));
+        }
+    }
+}
+
+-----------------------------------------------------------------
+//正负柱状图
+-----------------------------------------------------------------
+public class PositiveNegativeBarChartActivity extends AppCompatActivity {
+
+    private BarChart barChart1;
+
+    private List<String> xAxisValues;
+    private List<Float> yAxisValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bar_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setPositiveNegativeBarChart(barChart1,xAxisValues,yAxisValues,"正负柱状图");
+    }
+
+    private void initView(){
+        barChart1=(BarChart)findViewById(R.id.barChart1);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        yAxisValues = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(String.valueOf(i));
+            yAxisValues.add((float)(Math.random()*20-10));
+        }
+    }
+}
+
+-----------------------------------------------------------------
+//折线图（单）
+-----------------------------------------------------------------
+
+public class LineChartActivity extends AppCompatActivity {
+
+    private LineChart lineChart;
+    private List<String> xAxisValues;
+    private List<Float> yAxisValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_line_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setLineChart(lineChart,xAxisValues,yAxisValues,"折线图（单）",true);
+    }
+
+    private void initView(){
+        lineChart=(LineChart)findViewById(R.id.lineChart);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        yAxisValues = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(String.valueOf(i));
+            yAxisValues.add((float)(Math.random()*1000+20));
+        }
+    }
+}
+
+
+-----------------------------------------------------------------
+//折线图（复）
+-----------------------------------------------------------------
+public class MultiLineChartActivity extends AppCompatActivity {
+
+    private LineChart lineChart;
+    private List<String> xAxisValues;
+    private List<String> titles;
+    private List<List<Float>> yAxisValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_line_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setLinesChart(lineChart,xAxisValues,yAxisValues,titles,false,null);
+    }
+
+    private void initView(){
+        lineChart=(LineChart)findViewById(R.id.lineChart);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        List<Float> yAxisValues1 = new ArrayList<>();
+        List<Float> yAxisValues2 = new ArrayList<>();
+        List<Float> yAxisValues3 = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(String.valueOf(i));
+            yAxisValues1.add((float)(Math.random()*20+20));
+            yAxisValues2.add((float)(Math.random()*20+40));
+            yAxisValues3.add((float)(Math.random()*20+60));
+        }
+
+        yAxisValues = new ArrayList<>();
+        yAxisValues.add(yAxisValues1);
+        yAxisValues.add(yAxisValues2);
+        yAxisValues.add(yAxisValues3);
+
+        titles = new ArrayList<>();
+        titles.add("折线1");
+        titles.add("折线2");
+        titles.add("折线3");
+    }
+}
+
+-----------------------------------------------------------------
+//饼图
+-----------------------------------------------------------------
+public class PieChartActivity extends AppCompatActivity {
+
+    private PieChart pieChart;
+    private Map<String,Float> pieValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pie_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setPieChart(pieChart,pieValues,"饼图",true);
+    }
+
+    private void initView(){
+        pieChart=(PieChart)findViewById(R.id.pieChart);
+    }
+
+    private void initData(){
+        pieValues=new LinkedHashMap<>();
+        pieValues.put("A",100f);
+        pieValues.put("B",150f);
+        pieValues.put("C",30f);
+        pieValues.put("D",70f);
+    }
+}
+
+-----------------------------------------------------------------
+//组合图（折线和柱状图）
+-----------------------------------------------------------------
+public class CombineChartActivity extends AppCompatActivity {
+
+    private CombinedChart combineChart;
+    private List<String> xAxisValues;
+    private List<Float> lineValues;
+    private List<Float> lineValues2;
+    private List<Float> barValues;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_combine_chart);
+
+        initView();
+        initData();
+        MPChartHelper.setCombineChart(combineChart,xAxisValues,lineValues,lineValues2,barValues,"折线","柱子");
+    }
+
+    private void initView(){
+        combineChart=(CombinedChart)findViewById(R.id.combineChart);
+    }
+
+    private void initData(){
+        xAxisValues = new ArrayList<>();
+        lineValues = new ArrayList<>();
+        lineValues2 = new ArrayList<>();
+        barValues = new ArrayList<>();
+        for(int i=0;i<10;++i){
+            xAxisValues.add(""+i);
+            lineValues.add((float)(Math.random()*1000+20));
+            lineValues2.add((float)(Math.random()*1000+10));
+            barValues.add((float)(Math.random()*1000+20));
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

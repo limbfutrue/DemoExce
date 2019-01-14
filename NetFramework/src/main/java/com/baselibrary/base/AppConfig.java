@@ -25,6 +25,12 @@ public class AppConfig {
     //当前版本号
     public static final String CURR_VERSION = "CurrVersion";
 
+    //用户登录名
+    public static final String USERNAME = "userName";
+
+    //用户真是姓名
+    public static final String REAL_NAME = "real_name";
+
 
     public static AppConfig getInstance() {
         if (mySelf == null) {
@@ -157,12 +163,55 @@ public class AppConfig {
         return preferencesGetBoolean(HAS_LOGIN_FIRST + "_" + getUserId(), false);
     }
 
-    public void setLoginInfo(String userInfo){
-        preferencesSetString("userInfo",userInfo);
+    public void setClassInfo(String key,String info){
+        preferencesSetString(key,info);
     }
-//    public LoginBean getLoginInfo(){
-//        Gson gson = new Gson();
-//        LoginBean loginBean = gson.fromJson(preferencesGetString("userInfo",""),LoginBean.class);
-//        return loginBean;
-//    }
+    public <T> T getClassInfo(String key,Class<T> tClass){
+        Gson gson = new Gson();
+        T info = gson.fromJson(preferencesGetString(key,""),tClass);
+        return info;
+    }
+
+    public void saveUserName(String userName){
+        preferencesSetString(USERNAME,userName);
+    }
+
+    public String obtainUserName(){
+        return preferencesGetString(USERNAME,"");
+    }
+
+    public void saveRealName(String realName){
+        preferencesSetString(REAL_NAME,realName);
+    }
+
+    public String obtainRealName(){
+        return preferencesGetString(REAL_NAME,"");
+    }
+
+    /**
+     * 保存头像
+     * @param avatar
+     */
+    public void setAvatarPath(String avatar){
+        preferencesSetString(obtainUserName()+"avatar",avatar);
+    }
+    public String getAvatarPath(){
+        return preferencesGetString(obtainUserName()+"avatar","");
+    }
+
+    public void saveDefaultAddress(String defalutAddr){
+        preferencesSetString("defalutAddr",defalutAddr);
+    }
+
+    public String obtainDefalutAddress(){
+        return preferencesGetString("defalutAddr","");
+    }
+
+    public void saveCompanyId(String companyId){
+        preferencesSetString("companyId",companyId);
+    }
+
+    public String obtainCompanyId(){
+        return preferencesGetString("companyId","");
+    }
 }
