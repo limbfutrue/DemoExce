@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ui.TestAct">
+        <activity android:name=".TestAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
         <receiver
             android:name=".receiver.MyReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true">+
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -50,12 +50,12 @@
         <activity android:name=".ui.TestAct" />
         <activity android:name=".ui.testprogram.RegistAct"></activity>
 
-        <activity android:name=".ui.ui.rxjavaTest.SimpleActivity" />
-        <activity android:name=".ui.ui.rxjavaTest.MoreActivity" />
-        <activity android:name=".ui.ui.rxjavaTest.LambdaActivity" />
-        <activity android:name=".ui.ui.rxjavaTest.NetworkActivity" />
-        <activity android:name=".ui.ui.rxjavaTest.SafeActivity" />
-        <activity android:name=".ui.ui.rxjavaTest.BindingActivity"></activity>
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.SimpleActivity" />
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.MoreActivity" />
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.LambdaActivity" />
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.NetworkActivity" />
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.SafeActivity" />
+        <activity android:name="com.libaoming.demoexce.demoexce.ui.rxjavaTest.BindingActivity"></activity>
     </application>
 
 </manifest>

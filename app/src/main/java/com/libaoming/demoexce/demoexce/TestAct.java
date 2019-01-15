@@ -1,10 +1,12 @@
-package com.libaoming.demoexce.demoexce.ui.ui;
+package com.libaoming.demoexce.demoexce;
 
 import android.graphics.Color;
 
 import com.baselibrary.utils.tabswitch.TabView;
 import com.libaoming.demoexce.demoexce.R;
 import com.libaoming.demoexce.demoexce.base.BaseActivity;
+import com.libaoming.demoexce.demoexce.ui.BlankFragment;
+import com.libaoming.demoexce.demoexce.ui.MyFragment;
 
 public class TestAct extends BaseActivity {
     private TabView mTbv;
