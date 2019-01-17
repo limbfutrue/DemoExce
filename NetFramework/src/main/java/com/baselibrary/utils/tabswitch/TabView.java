@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Z
+ * @author LBM
  */
 public class TabView extends RelativeLayout {
     private RadioGroup bottomRadioGroup;
@@ -101,6 +101,11 @@ public class TabView extends RelativeLayout {
     public void addTab(Context context, int tabCount, List<Integer> topDefaultDrawableList
             , List<Integer> topCheckDrawableList, String[] textList, int[] textColorList) {
         this.tabCount = tabCount;
+        if(tabCount>5){
+            Log.e("callback", "addTab: 最大只能有五个标签");
+            return;
+        }
+        this.tabCount = tabCount;
         if (topDefaultDrawableList != null && tabCount != topDefaultDrawableList.size()) {
             Log.e("callback", "addTab: 未选中图片数组长度与tab长度不一致");
             return;
@@ -144,8 +149,11 @@ public class TabView extends RelativeLayout {
      * @param textColorList 选中文字颜色 第一个为选中颜色，第二个值为未选中字体颜色
      */
     public void addTab(Context context, int tabCount, String[] textList, int[] textColorList) {
+        if(tabCount>5){
+            Log.e("callback", "addTab: 最大只能有五个标签");
+            return;
+        }
         this.tabCount = tabCount;
-        RadioButton radioButton;
         RadioGroup.LayoutParams rbParams = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
         for (int i = 0; i < tabCount; i++) {
             addRadioButton(context, textList[i], textColorList, rbParams, i);
@@ -161,8 +169,7 @@ public class TabView extends RelativeLayout {
      * @param i
      */
     private void addRadioButton(Context context, String text, int[] textColorList, RadioGroup.LayoutParams rbParams, int i) {
-        RadioButton radioButton;
-        radioButton = new RadioButton(context);
+        RadioButton radioButton = new RadioButton(context);
         rbParams.weight = 1;
         radioButton.setLayoutParams(rbParams);
         radioButton.setGravity(Gravity.CENTER);
@@ -186,7 +193,7 @@ public class TabView extends RelativeLayout {
      */
     public void addFragmentAndBindTab(final FragmentActivity act, Fragment... fragments){
         if (tabCount < fragments.length){
-            Log.e("log_print_info", "addFragmentAndBindTab: fragment长度和tab长度不一致");
+            Log.e("callback", "addFragmentAndBindTab: fragment长度和tab长度不一致");
             return;
         }
         final List<Fragment> fList = new ArrayList<>();
